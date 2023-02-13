@@ -8,11 +8,28 @@
     cursor: pointer;
     &__icon {
       min-width: 14px;
+      height: 10px;
       svg,
       i {
         display: block;
         width: 0.875rem;
         height: 0.75rem;
+      }
+      &-btn {
+        svg,
+        span {
+          opacity: 0.4;
+          transition: all 0.3s;
+        }
+        span {
+          color: #767676;
+        }
+        &:hover {
+          svg,
+          span {
+            opacity: 1;
+          }
+        }
       }
       svg {
         path {
