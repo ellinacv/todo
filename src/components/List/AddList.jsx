@@ -5,6 +5,7 @@ import './AddList.scss';
 
 export const AddList = ({ colors }) => {
   const [showPopup, setShowPopup] = useState(false);
+  const [selectedColor, selectColor] = useState(colors[0].id);
   return (
     <div className="add-list">
       <List
@@ -45,7 +46,12 @@ export const AddList = ({ colors }) => {
           <input className="field" type="text" placeholder="Название списка" />
           <div className="add-list-popup__colors">
             {colors.map((color) => (
-              <Badge key={color.hex} color={color.name} />
+              <Badge
+                onClick={() => selectColor(color.id)}
+                key={color.hex}
+                color={color.name}
+                className={selectedColor === color.id && 'active'}
+              />
             ))}
           </div>
           <button className="button add-list__button">Добавить</button>

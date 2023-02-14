@@ -3,6 +3,11 @@
   width: 10px;
   height: 10px;
   border-radius: 30px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  &.active {
+    border: 1px solid #525252;
+  }
   &_grey {
     background-color: #c9d1d3;
   }
