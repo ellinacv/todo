@@ -1,10 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Badge } from '../Badge/Badge';
 import './List.scss';
 
-export const List = ({ items, isRemovable }) => {
+export const List = ({ items, isRemovable, onClick }) => {
   return (
-    <ul className="list">
+    <ul onClick={onClick} className="list">
       {items.map((item, index) => (
         <li
           key={index}
@@ -13,11 +14,7 @@ export const List = ({ items, isRemovable }) => {
           })}
         >
           <div className="list-item__icon">
-            {item.icon ? (
-              item.icon
-            ) : (
-              <i className={`badge badge_${item.color}`}></i>
-            )}
+            {item.icon ? item.icon : <Badge color={item.color} />}
           </div>
           <span>{item.title}</span>
         </li>

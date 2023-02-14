@@ -1,4 +1,7 @@
 .list {
+  &:first-child {
+    margin-bottom: 1.875rem;
+  }
   &-item {
     margin-bottom: 0.3125rem;
     padding: 0.625rem 0.75rem;
@@ -6,14 +9,15 @@
     align-items: center;
     gap: 0.625rem;
     cursor: pointer;
+
     &__icon {
       min-width: 14px;
-      height: 10px;
+      // height: 8px;
       svg,
       i {
         display: block;
-        width: 0.875rem;
-        height: 0.75rem;
+        // width: 0.875rem;
+        // height: 0.75rem;
       }
       &-btn {
         svg,
@@ -34,22 +38,6 @@
       svg {
         path {
           fill: #7c7c7c;
-        }
-      }
-      .badge {
-        position: relative;
-        left: 2px;
-        width: 10px;
-        height: 10px;
-        border-radius: 30px;
-        &_green {
-          background-color: #42b883;
-        }
-        &_blue {
-          background-color: #64c4ed;
-        }
-        &_pink {
-          background-color: #ffbbcc;
         }
       }
     }

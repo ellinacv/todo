@@ -1,5 +1,7 @@
 import React from 'react';
 import { List } from './components/List/List';
+import { AddList } from './components/List/AddList';
+import DB from './data/db.json';
 
 export const App = () => {
   return (
@@ -39,38 +41,7 @@ export const App = () => {
           ]}
           isRemovable
         />
-        <List
-          items={[
-            {
-              className: 'list-item__icon-btn',
-              icon: (
-                <svg
-                  width="10"
-                  height="10"
-                  viewBox="0 0 12 12"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6 1V11"
-                    stroke="#868686"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                  <path
-                    d="M1 6H11"
-                    stroke="#868686"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              ),
-              title: 'Добавить папку',
-            },
-          ]}
-        />
+        <AddList colors={DB.colors} />
       </div>
       <div className="todo-tasks"></div>
     </div>

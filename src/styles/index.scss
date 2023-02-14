@@ -26,6 +26,34 @@ body {
   justify-content: center;
   align-items: center;
 }
+// Универсальные стили
+.field {
+  padding: 0.5rem 0.75rem;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #efefef;
+  border-radius: 4px;
+  &:focus {
+    outline: none;
+    border-color: #e7e5e5;
+  }
+}
+
+.button {
+  padding: 0.625rem;
+  color: #fff;
+  background-color: #4dd599;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  &:hover {
+    background-color: darken(#45c08b, 7%);
+  }
+  &:active {
+    background-color: darken(#45c08b, 10%);
+  }
+}
+//
 
 .todo {
   width: 45.875rem;
@@ -36,7 +64,7 @@ body {
 
   &-sidebar {
     padding: 3.74rem 1.25rem;
-    width: 12.5rem;
+    width: 13.5rem;
     height: 100%;
     background-color: $bg-color;
     border-right: 1px solid #f1f1f1;
