@@ -6,9 +6,9 @@ import './List.scss';
 export const List = ({ items, isRemovable, onClick }) => {
   return (
     <ul onClick={onClick} className="list">
-      {items.map((item, index) => (
+      {items.map((item) => (
         <li
-          key={index}
+          key={item.id}
           className={classNames('list-item', item.className, {
             active: item.active,
           })}
@@ -16,7 +16,7 @@ export const List = ({ items, isRemovable, onClick }) => {
           <div className="list-item__icon">
             {item.icon ? item.icon : <Badge color={item.color} />}
           </div>
-          <span>{item.title}</span>
+          <span>{item.name}</span>
         </li>
       ))}
     </ul>

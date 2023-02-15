@@ -6,6 +6,15 @@
     align-items: center;
     gap: 0.625rem;
     cursor: pointer;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.5);
+      transition: all 0.4s;
+    }
+    &.active {
+      background-color: #fff;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.04);
+      border-radius: 4px;
+    }
 
     &__icon {
       min-width: 14px;
@@ -37,12 +46,6 @@
           fill: #7c7c7c;
         }
       }
-    }
-
-    &.active {
-      background-color: #fff;
-      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.04);
-      border-radius: 4px;
     }
   }
 }
