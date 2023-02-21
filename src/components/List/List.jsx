@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Badge } from '../Badge/Badge';
 import './List.scss';
 
-export const List = ({ items, isRemovable, onClick }) => {
+export const List = ({ items, colors, isRemovable, onClick, onRemove }) => {
   return (
     <ul onClick={onClick} className="list">
       {items.map((item) => (
@@ -14,9 +14,27 @@ export const List = ({ items, isRemovable, onClick }) => {
           })}
         >
           <div className="list-item__icon">
-            {item.icon ? item.icon : <Badge color={item.color} />}
+            {item.icon ? (
+              item.icon
+            ) : (
+              <Badge
+                color={
+                  (colors.find((c) => c.id === item.colorId) || { hex: '#ccc' })
+                    .hex
+                }
+              />
+            )}
           </div>
           <span>{item.name}</span>
+          {isRemovable && (
+            <button
+              type="button"
+              className="btn_remove"
+              onClick={() => onRemove(item)}
+            >
+              &#x2715;
+            </button>
+          )}
         </li>
       ))}
     </ul>

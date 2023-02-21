@@ -1,27 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { List } from './components/List/List';
 import { AddList } from './components/List/AddList';
-import DB from './data/db.json';
+import { Tasks } from './components/Tasks/Tasks';
+import { getUserLists, addListItem } from './api/lists';
+import { getUserColors } from './api/colors';
 
 export const App = () => {
-  const [lists, setLists] = useState(
-    DB.lists.map((item) => {
-      item.color = DB.colors.filter(
-        (color) => color.id === item.colorId,
-      )[0].name;
-      return item;
-    }),
-  );
-  const onAddList = (obj) => {
-    const newList = [...lists, obj];
-    setLists(newList);
+  const [lists, setLists] = useState([]);
+  const [colors, setColors] = useState([]);
+
+  useEffect(() => {
+    Promise.all([
+      getUserColors().then(setColors),
+      getUserLists().then(setLists),
+    ]);
+  }, []);
+
+  const onAddList = async ({ name, colorId }) => {
+    const newItem = await addListItem({ name, colorId });
+    setLists((l) => [...l, newItem]);
   };
+
   return (
     <div className="todo">
       <div className="todo-sidebar">
         <List
           items={[
             {
+              id: 0,
               icon: (
                 <svg
                   viewBox="0 0 14 12"
@@ -34,11 +40,14 @@ export const App = () => {
               name: 'Все задачи',
             },
           ]}
+          colors={colors}
         />
-        <List items={lists} isRemovable />
-        <AddList onAdd={onAddList} colors={DB.colors} />
+        <List items={lists} colors={colors} isRemovable />
+        <AddList colors={colors} onAdd={onAddList} />
       </div>
-      <div className="todo-tasks"></div>
+      <div className="todo-tasks">
+        <Tasks />
+      </div>
     </div>
   );
 };

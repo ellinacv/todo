@@ -53,13 +53,22 @@ body {
     background-color: darken(#45c08b, 10%);
   }
 }
+
+.btn_remove {
+  background-color: transparent;
+  color: #7c7c7c;
+  opacity: 0;
+  transition: all 0.3s;
+  &:hover {
+    color: #000;
+  }
+}
 //
 
 .todo {
-  width: 45.875rem;
-  height: 33.125rem;
-
-  // border: 1px solid #000;
+  display: flex;
+  width: 50rem;
+  height: 35rem;
   box-shadow: 1px 1px 11px #e4e3e3;
 
   &-sidebar {
@@ -69,5 +78,10 @@ body {
     height: 100%;
     background-color: $bg-color;
     border-right: 1px solid #f1f1f1;
+  }
+
+  &-tasks {
+    padding: 3.5rem;
+    flex: 1;
   }
 }
