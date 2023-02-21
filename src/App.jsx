@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { List } from './components/List/List';
 import { AddList } from './components/List/AddList';
 import { Tasks } from './components/Tasks/Tasks';
-import { getUserLists, addListItem } from './api/lists';
+import { getUserLists, addList, deleteList } from './api/lists';
 import { getUserColors } from './api/colors';
 
 export const App = () => {
@@ -17,8 +17,13 @@ export const App = () => {
   }, []);
 
   const onAddList = async ({ name, colorId }) => {
-    const newItem = await addListItem({ name, colorId });
+    const newItem = await addList({ name, colorId });
     setLists((l) => [...l, newItem]);
+  };
+
+  const onDeleteList = async (listId) => {
+    const deletedId = await deleteList(listId);
+    setLists((l) => l.filter((li) => li.id !== deletedId));
   };
 
   return (
@@ -42,11 +47,16 @@ export const App = () => {
           ]}
           colors={colors}
         />
-        <List items={lists} colors={colors} isRemovable />
+        <List
+          items={lists}
+          colors={colors}
+          onRemove={onDeleteList}
+          isRemovable
+        />
         <AddList colors={colors} onAdd={onAddList} />
       </div>
       <div className="todo-tasks">
-        <Tasks />
+        {lists[1] !== undefined && <Tasks list={lists[1]} />}
       </div>
     </div>
   );

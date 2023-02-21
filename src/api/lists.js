@@ -25,7 +25,7 @@ export const getUserLists = () =>
     }
   });
 
-export const addListItem = ({ name, colorId }) =>
+export const addList = ({ name, colorId }) =>
   new Promise((resolve, reject) => {
     try {
       const existed = window.localStorage.getItem(LISTS_CACHE_KEY);
@@ -51,6 +51,27 @@ export const addListItem = ({ name, colorId }) =>
       window.localStorage.setItem(LISTS_CACHE_KEY, JSON.stringify(edited));
 
       resolve(newItem);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
+export const deleteList = (listId) =>
+  new Promise((resolve, reject) => {
+    try {
+      const existed = window.localStorage.getItem(LISTS_CACHE_KEY);
+      if (!existed) {
+        throw new Error('The list not found');
+      }
+
+      const parsed = JSON.parse(existed);
+      const edited = parsed.filter((l) => l.id !== listId);
+
+      if (edited.length !== parsed.length) {
+        window.localStorage.setItem(LISTS_CACHE_KEY, JSON.stringify(edited));
+      }
+
+      resolve(listId);
     } catch (error) {
       reject(error);
     }

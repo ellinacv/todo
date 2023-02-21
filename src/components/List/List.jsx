@@ -4,6 +4,13 @@ import { Badge } from '../Badge/Badge';
 import './List.scss';
 
 export const List = ({ items, colors, isRemovable, onClick, onRemove }) => {
+  const removeList = (item) => {
+    if (
+      window.confirm(`Вы действительно хотите удалить список "${item.name}"?`)
+    ) {
+      return onRemove(item.id);
+    }
+  };
   return (
     <ul onClick={onClick} className="list">
       {items.map((item) => (
@@ -30,7 +37,7 @@ export const List = ({ items, colors, isRemovable, onClick, onRemove }) => {
             <button
               type="button"
               className="btn_remove"
-              onClick={() => onRemove(item)}
+              onClick={() => removeList(item)}
             >
               &#x2715;
             </button>
