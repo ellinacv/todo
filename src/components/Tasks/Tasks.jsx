@@ -1,11 +1,11 @@
 import React from 'react';
 import './Tasks.scss';
 
-export const Tasks = () => {
+export const Tasks = ({ list }) => {
   return (
     <div className="tasks">
       <div className="tasks-header">
-        <h2 className="tasks__title">Фронтенд</h2>
+        <h2 className="tasks__title">{list.name}</h2>
         <button type="button" className="tasks-header__btn">
           <svg
             viewBox="0 0 15 15"
@@ -20,25 +20,31 @@ export const Tasks = () => {
         </button>
       </div>
       <div className="tasks-body">
-        <div className="tasks-body__item">
-          <div className="checkbox">
-            <input id="check" type="checkbox" />
-            <label htmlFor="check">
-              <svg
-                viewBox="0 0 11 8"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </label>
-          </div>
-          <p>ReactJS Hooks (useState, useReducer, useEffect и т.д.)</p>
-        </div>
+        {list.tasks && list.tasks.length ? (
+          list.tasks.map((task) => (
+            <div key={task.id} className="tasks-body__item">
+              <div className="checkbox">
+                <input id={`task-${task.id}`} type="checkbox" />
+                <label htmlFor={`task-${task.id}`}>
+                  <svg
+                    viewBox="0 0 11 8"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M9.29999 1.20001L3.79999 6.70001L1.29999 4.20001"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </label>
+              </div>
+              <p>{task.text}</p>
+            </div>
+          ))
+        ) : (
+          <p>Задачи отсутствуют</p>
+        )}
       </div>
     </div>
   );

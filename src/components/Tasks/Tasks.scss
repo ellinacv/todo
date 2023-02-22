@@ -1,5 +1,9 @@
 .tasks {
   &-body {
+    p {
+      font-weight: 700;
+      color: #c9d1d3;
+    }
     &__item {
       margin: 1.25rem 0;
       display: flex;
