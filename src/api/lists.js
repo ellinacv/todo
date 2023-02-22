@@ -1,8 +1,12 @@
-import DB from '../data/db.json';
-
 const LISTS_CACHE_KEY = '_lists';
 
-const getInitialLists = () => [...DB.lists];
+const getInitialLists = () => [
+  {
+    id: '_without-list',
+    name: 'Without list',
+    colorId: 1,
+  },
+];
 
 export const getUserLists = () =>
   new Promise((resolve, reject) => {
