@@ -9,6 +9,7 @@ import { getAllUserTasks } from './api/tasks';
 export const App = () => {
   const [lists, setLists] = useState([]);
   const [colors, setColors] = useState([]);
+  const [selectedList, setSelectedList] = useState();
 
   useEffect(() => {
     getAllUserTasks()
@@ -38,6 +39,7 @@ export const App = () => {
   const onDeleteList = async (listId) => {
     const deletedId = await deleteList(listId);
     setLists((l) => l.filter((li) => li.id !== deletedId));
+    setSelectedList((l) => (l.id === deletedId ? undefined : l));
   };
 
   return (
@@ -66,11 +68,14 @@ export const App = () => {
           colors={colors}
           onRemove={onDeleteList}
           isRemovable
+          onClickItem={setSelectedList}
         />
         <AddList colors={colors} onAdd={onAddList} />
       </div>
       <div className="todo-tasks">
-        {lists[1] !== undefined && <Tasks list={lists[1]} />}
+        {lists && lists.length > 0 && selectedList !== undefined && (
+          <Tasks list={selectedList} />
+        )}
       </div>
     </div>
   );

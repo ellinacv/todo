@@ -3,7 +3,14 @@ import classNames from 'classnames';
 import { Badge } from '../Badge/Badge';
 import './List.scss';
 
-export const List = ({ items, colors, isRemovable, onClick, onRemove }) => {
+export const List = ({
+  items,
+  colors,
+  isRemovable,
+  onClick,
+  onClickItem,
+  onRemove,
+}) => {
   const removeList = (item) => {
     if (
       window.confirm(`Вы действительно хотите удалить список "${item.name}"?`)
@@ -19,6 +26,9 @@ export const List = ({ items, colors, isRemovable, onClick, onRemove }) => {
           className={classNames('list-item', item.className, {
             active: item.active,
           })}
+          onClick={
+            onClickItem !== undefined ? () => onClickItem(item) : undefined
+          }
         >
           <div className="list-item__icon">
             {item.icon ? (
