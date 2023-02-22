@@ -2,21 +2,13 @@ import { nanoid } from 'nanoid';
 
 const TASKS_CACHE_KEY = '_tasks';
 
-const getInitialTasks = () => [
-  {
-    id: nanoid(),
-    listId: 1,
-    text: 'My first task',
-    completed: false,
-  },
-];
-
 export const getAllUserTasks = () =>
   new Promise((resolve, reject) => {
     try {
       const tasks = window.localStorage.getItem(TASKS_CACHE_KEY);
       if (!tasks) {
-        return getInitialTasks();
+        resolve([]);
+        return;
       }
       resolve(JSON.parse(tasks));
     } catch (error) {
