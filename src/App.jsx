@@ -4,16 +4,30 @@ import { AddList } from './components/List/AddList';
 import { Tasks } from './components/Tasks/Tasks';
 import { getUserLists, addList, deleteList } from './api/lists';
 import { getUserColors } from './api/colors';
+import { getAllUserTasks } from './api/tasks';
 
 export const App = () => {
   const [lists, setLists] = useState([]);
   const [colors, setColors] = useState([]);
 
   useEffect(() => {
-    Promise.all([
-      getUserColors().then(setColors),
-      getUserLists().then(setLists),
-    ]);
+    getAllUserTasks()
+      .then((allTasks) =>
+        Promise.all([
+          getUserColors().then(setColors),
+          getUserLists().then((userLists) => {
+            setLists(
+              userLists.map((list) => ({
+                ...list,
+                tasks: allTasks.filter((t) => t.listId === list.id),
+              })),
+            );
+          }),
+        ]),
+      )
+      .catch(() => {
+        window.alert('Не удалось получить задачи');
+      });
   }, []);
 
   const onAddList = async ({ name, colorId }) => {
